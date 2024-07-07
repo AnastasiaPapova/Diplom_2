@@ -2,6 +2,7 @@ import pytest
 import allure
 import requests
 
+import helpers
 from urls import Urls, Handlers
 from data import User
 
@@ -10,8 +11,9 @@ from data import User
 class TestCreateUser:
 
     @allure.step('Создание нового пользователя')
+
     def test_create_new_user_success(self):
-        response = requests.post(f'{Urls.BASE_URL}{Handlers.CREATE_USER}', data=User.create_user())
+        response = requests.post(f'{Urls.BASE_URL}{Handlers.CREATE_USER}', data=helpers.create_user())
         assert response.status_code == 200 and response.json()["success"] is True
 
     @allure.step('Создание пользователя который уже есть в системе')

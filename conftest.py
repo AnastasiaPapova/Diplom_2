@@ -1,13 +1,13 @@
 import pytest
 import requests
 
+import helpers
 from urls import Urls, Handlers
-from data import User
 
 
 @pytest.fixture(scope="function")
 def create_user():
-    payload = User.create_user()
+    payload = helpers.create_user()
     login_data = payload.copy()
     login_data.pop("name")
     response = requests.post(f"{Urls.BASE_URL}{Handlers.CREATE_USER}", data=payload)
